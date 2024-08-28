@@ -1,0 +1,291 @@
+/* thiet ke thong so va dinh dang trang web */
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: #212529;
+}
+main {
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* NAVIGATION BAR */
+header {
+  font-family: sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #edf0f1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 3%;
+  height: 70px;
+}
+
+.nav-links {
+  background-color: #212529;
+  border: none;
+}
+
+.nav-links li {
+  display: inline-block;
+  padding: 0 20px;
+}
+
+.nav-links li a {
+  color: #edf0f1;
+  text-decoration: none;
+}
+
+.contact button {
+  padding: 9px 25px;
+  background-color: #099268;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-bottom: 27.5px;
+  color: #edf0f1;
+}
+
+.contact button:hover {
+  background-color: #0ca678;
+}
+/* CART TEMPERATURE AND HUMIDITY */
+.main-header {
+  margin: 20px;
+  padding: 0;
+  font-size: 24px;
+  color: #f2f2f2;
+}
+
+.card {
+  background-color: #353b41;
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 15px;
+  margin-left: 20px;
+  & p {
+    font-size: 14px;
+    color: #f2f2f2;
+  }
+
+  & h2 {
+    font-weight: 500;
+    font-size: 28px;
+    color: #f2f2f2;
+  }
+}
+
+.weather-data {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+
+  .weather-left {
+    grid-column: span 1;
+
+    .current-weather {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h2 {
+        margin: 7px 0;
+      }
+
+      p {
+        color: #f2f2f2;
+      }
+    }
+
+    .gas {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .light {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-footer {
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .forecast-item {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      place-content: center;
+      margin-bottom: 15px;
+      .icon-wrapper {
+        display: flex;
+        align-items: center;
+      }
+      p {
+        margin-top: 15px;
+      }
+    }
+  }
+}
+
+.air-conditioner {
+  background-color: #353b41;
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 15px;
+  height: 355px;
+  display: grid;
+}
+
+.air-button {
+  display: flex;
+  justify-content: center;
+}
+
+.air-button .btn {
+  width: 150px;
+}
+
+.alarm {
+  background-color: #353b41;
+  color: #f2f2f2;
+  font-weight: 500;
+  border-radius: 15px;
+  padding: 15px;
+  height: 142px;
+  display: flex;
+  justify-content: center;
+}
+
+.datetime {
+  color: #f2f2f2;
+  background-color: #353b41;
+  margin-right: 15px;
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.datetime:hover {
+  background-color: #12b886;
+  box-shadow: 0 0 30px #12b886;
+}
+
+.date {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 3px;
+}
+
+.time {
+  font-size: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.time span:not(:last-child) {
+  position: relative;
+  margin: 0 6px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 3px;
+}
+
+.time span:last-child {
+  background-color: #2e94e3;
+  font-size: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-top: 10px;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+.clock {
+  color: #112a46;
+  display: flex;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  border: 2px solid #2e94e3;
+  align-items: center;
+  justify-content: center;
+  background-color: #acc8e5;
+  position: relative;
+  font-weight: 600;
+}
+
+.number {
+  transform: rotate(calc(30deg * var(--n)));
+  position: absolute;
+  text-align: center;
+  inset: 20px;
+  font-size: 18px;
+}
+
+.number b {
+  transform: rotate(calc(-30deg * var(--n)));
+  display: inline-block;
+}
+
+.center-dot {
+  background-color: #112a46;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
+.hour-hand,
+.minute-hand,
+.second-hand {
+  --rotate: 0;
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%) rotate(calc(var(--rotate) * 1deg));
+  transform-origin: bottom;
+}
+
+.hour-hand {
+  width: 12px;
+  height: 90px;
+  background-color: #112a46;
+}
+
+.minute-hand {
+  width: 9px;
+  height: 110px;
+  background-color: #2164af;
+}
+
+.second-hand {
+  width: 6px;
+  height: 125px;
+  background-color: #f03e3e;
+}
+
+button {
+  margin-top: 2rem;
+}
+.fan_off {
+  width: 200px;
+  height: 200px;
+  margin: auto;
+}
+.fan_on {
+  width: 200px;
+  height: 200px;
+  margin: auto;
+}

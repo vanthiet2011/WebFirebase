@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body onload="initClock()">
+    <header>
+      <h4>Dashboard</h4>
+      <div class="nav-links">
+        <li><a href="introduce.html">Introduce</a></li>
+        <li><a href="home.html">Project</a></li>
+        <li><a href="about.html">About</a></li>
+        <a href="#" class="contact"><button>Contact</button></a>
+      </div>
+    </header>
+    <div class="main-content" onload="initClock()">
+      <div class="weather-data">
+        <div class="weather-left">
+          <div class="card">
+            <div class="current-weather">
+              <div class="details">
+                <p>Now</p>
+                <h2>Temperature: <span id="nhietdo"></span>°C</h2>
+                <h2>Humidity: <span id="doam"></span>%</h2>
+                <p>_______________________________________________</p>
+              </div>
+              <div class="weather-icon">
+                <img
+                  src="https://openweathermap.org/img/wn/04d@2x.png"
+                  alt=""
+                  style="width: 100px; height: 100px"
+                />
+              </div>
+            </div>
+            <div class="card-footer">
+              <p><i class="fa-light fa-calendar"></i></p>
+              <p><i class="fa-light fa-location-dot"></i></p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="gas">
+              <div class="details">
+                <h2>Gas concentration: <span id="khigas"></span>ppm</h2>
+                <p>________________________________________________</p>
+              </div>
+              <div class="gas-icon" style="width: 100px;height: 100px;">
+                <p style="font-size: 50px;">🔥</p>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="light">
+              <div class="details">
+                <h2>Light: <span id="anhsang"></span></h2>
+                <p>________________________________________________</p>
+              </div>
+              <div class="light-icon" style="width: 84.25px;height: 100px;">
+                <p style="font-size: 50px;">💡</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="middle-card">
+          <div class="air-conditioner">
+            <img src="img/fan_off.png" class="fan_on" alt="" />
+            <div class="air-button">
+              <button type="button" id="btn1" class="btn waves-effect waves-lights">
+                On
+              </button>
+              <button type="button" id="btn2" class="btn waves-effect waves-lights">
+                Off</button>
+            </div>
+              <br /><br />
+          </div>
+            <div class="alarm">
+              <p style="font-size: 32px;">Alarm!!!</p>
+              <div class="alarm-icon" style="width: 100px;height: 100px;">
+                <p style="font-size: 50px;cursor: pointer;">🚨</p>
+              </div>
+            </div>
+        </div>
+        <div class="datetime">
+          <div class="date">
+              <span id="datename">Day</span>, 
+              <span id="month">Month</span> 
+              <span id="daynum">00</span>, 
+              <span id="year">Year</span>
+          </div>
+          <div class="time">
+              <span id="hours">00</span>:
+              <span id="minutes">00</span>:
+              <span id="seconds">00</span>
+              <span id="period">AM</span>
+          </div>
+          <div class="clock">
+            <div class="number" style="--n:1"><b>1</b></div>
+            <div class="number" style="--n:2"><b>2</b></div>
+            <div class="number" style="--n:3"><b>3</b></div>
+            <div class="number" style="--n:4"><b>4</b></div>
+            <div class="number" style="--n:5"><b>5</b></div>
+            <div class="number" style="--n:6"><b>6</b></div>
+            <div class="number" style="--n:7"><b>7</b></div>
+            <div class="number" style="--n:8"><b>8</b></div>
+            <div class="number" style="--n:9"><b>9</b></div>
+            <div class="number" style="--n:10"><b>10</b></div>
+            <div class="number" style="--n:11"><b>11</b></div>
+            <div class="number" style="--n:12"><b>12</b></div>
+            <div class="hour-hand" id="hour-hand"></div>
+            <div class="minute-hand" id="minute-hand"></div>
+            <div class="second-hand" id="second-hand"></div>
+            <div class="center-dot"></div>
+          </div>
+      </div>
+        </div>
+      </div>
+
+    </div>
+    <audio src="alarm.mp3" id="audio" autostart="false"></audio>
+    <script src="functions.js"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-database.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>
+    <!-- lien ket voi functions.js -->
+
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      var firebaseConfig = {
+        apiKey: "AIzaSyDuTt__oD2ws_xM_7qANDJI7i0uzLItAHg",
+        authDomain: "dht11-9d1fd.firebaseapp.com",
+        databaseURL: "https://dht11-9d1fd-default-rtdb.firebaseio.com",
+        projectId: "dht11-9d1fd",
+        storageBucket: "dht11-9d1fd.appspot.com",
+        messagingSenderId: "7055827786",
+        appId: "1:7055827786:web:092e30cb43b53f11a017b3",
+        measurementId: "G-Z276NGG4NG",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+
+      //functions
+      // make sure that the name in ' ' match with name of your database child
+      var nhietDo = document.getElementById("nhietdo");
+      var dbRef = firebase.database().ref().child("Nhiet do");
+      var doAm = document.getElementById("doam");
+      var dbRef2 = firebase.database().ref().child("Do am");
+      var khiGas = document.getElementById("khigas");
+      var dbRef3 = firebase.database().ref().child("Khi gas");
+      var anhSang = document.getElementById("anhsang");
+      var dbRef4 = firebase.database().ref().child("Anh sang");
+      dbRef.on("value", (snap) => (nhietDo.innerText = snap.val()));
+      dbRef2.on("value", (snap) => (doAm.innerText = snap.val()));
+      dbRef3.on("value", (snap) => {
+        var gasValue = snap.val();
+        khiGas.innerText = gasValue;
+        if (gasValue > 100) {
+          audio.play();
+        }
+      });
+      dbRef4.on("value", (snap) => {
+    var value = snap.val();
+    if (value === 0) {
+        anhSang.innerText = "Bright";
+    } else if (value === 1) {
+        anhSang.innerText = "Dark";
+    } else {
+        anhSang.innerText = "Unknown"; // Trong trường hợp giá trị không phải là 0 hoặc 1
+    }
+    });
+    // Set audio khi nhan
+    let btn=document.querySelector(".alarm-icon");
+    let audio = document.querySelector("#audio");
+    btn.onclick = function () {
+        audio.play();
+      };
+    </script>
+  </body>
+</html>
